@@ -40,4 +40,5 @@ docker-compose  -f docker-compose.yml up -d;
 cd config-center/nacos;
 bash nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t seata -u nacos -w nacos
 
+docker restart seata
 # 说明 sh ./nacos-config.sh -h nacos地址 -p nacos端口 -g 所在组 -u nacos用户名 -w nacos密码
