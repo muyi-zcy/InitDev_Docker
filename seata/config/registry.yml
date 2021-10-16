@@ -1,0 +1,23 @@
+registry:
+  # file,nacos,eureka,redis,zk,consul,etcd3,sofa
+  type: nacos
+
+  nacos:
+    application: seata-server
+    serverAddr: nacos:8848
+    group: SEATA_GROUP
+    namespace: 
+    cluster: default
+    username: nacos
+    password: nacos
+  
+config:
+  # file、nacos 、apollo、zk、consul、etcd3
+  type: nacos
+
+  nacos:
+    serverAddr: nacos:8848
+    namespace: 
+    group: SEATA_GROUP
+    username: nacos
+    password: nacos
