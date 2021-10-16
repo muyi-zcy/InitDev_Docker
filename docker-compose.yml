@@ -13,11 +13,11 @@ services:
       - /root/data/redis/data:/data
       - /root/data/redis/redis.conf:/etc/redis/redis.conf
   mysql:
-    image: mysql:8.0.26
+    image: nacos/nacos-mysql:8.0.16
     restart: "always"
     networks:
       - my_net
-    container_name: mysql
+    container_name: mysql_db
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       - TZ=Asia/Shanghai
@@ -36,6 +36,7 @@ services:
     networks:
       - my_net
     container_name: zookeeper
+    privileged: true
     volumes:
       - /root/data/zk/config:/conf
       - /root/data/zk/data:/data
@@ -79,12 +80,13 @@ services:
     ports:
       - 8091:8091
     environment:
-      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
-      - SEATA_IP=127.0.0.1
       - SEATA_PORT=8091
       - TZ=Asia/Shanghai
+      - STORE_MODE=file
+      - SEATA_CONFIG_NAME=file:/seata-server/resources/registry
     volumes:
       - /root/data/seata/config:/root/seata-config
+      - /root/data/seata/resources/registry.conf:/seata-server/resources/registry.conf
     depends_on:
       - mysql
       - nacos
@@ -93,4 +95,5 @@ services:
       - my_net
 networks:
   my_net:
-    external: true
+    external:
+      name: my_net

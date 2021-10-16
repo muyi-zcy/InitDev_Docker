@@ -44,7 +44,7 @@ store.file.sessionReloadReadSize=100
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://mysql:3306/seata_config?useUnicode=true&serverTimezone=GMT%2b8
+store.db.url=jdbc:mysql://mysql_db:3306/seata_config?useUnicode=true&serverTimezone=GMT%2b8
 store.db.user=root
 store.db.password=123456
 store.db.minConn=5

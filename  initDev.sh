@@ -25,8 +25,19 @@ echo '创建nacos配置';
 mkdir -p ~/data/nacos;
 mkdir -p ~/data/nacos/init.d;
 cp -f ./nacos/init.d/custom.properties ~/data/nacos/init.d;
-docker-compose  -f docker-compose.yaml up -d;
+
+mkdir -p ~/data/seata/resources/
+cp -f ./seata/config/registry.conf ~/data/seata/resources
+
+# 删除所有dangling数据卷(即无用的volume)
+docker volume rm $(docker volume ls -qf dangling=true);
+# 删除所有dangling镜像(即无tag的镜像)：
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}");
+#删除所有关闭的容器
+docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm;
+
+docker-compose  -f docker-compose.yml up -d;
 cd config-center/nacos;
-sh ./nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -u nacos -w nacos;
+bash nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t seata -u nacos -w nacos
 
 # 说明 sh ./nacos-config.sh -h nacos地址 -p nacos端口 -g 所在组 -u nacos用户名 -w nacos密码
