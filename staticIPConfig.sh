@@ -1,6 +1,4 @@
-root@base:~/initShell# cat staticIPConfig.sh 
 #!/bin/bash
-
 # 修改静态IP
 # Version:Ubuntu 20.04.3 LTS
 
