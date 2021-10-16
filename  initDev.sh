@@ -37,6 +37,9 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}");
 docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm;
 
 docker-compose  -f docker-compose.yml up -d;
+
+docker exec -i $(docker ps -aqf 'name=mysql') mysql -u root -p123456 <./seata_init.sql
+
 cd config-center/nacos;
 bash nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t seata -u nacos -w nacos
 
