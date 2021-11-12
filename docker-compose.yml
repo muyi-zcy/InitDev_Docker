@@ -43,6 +43,20 @@ services:
       - /root/data/zk/logs:/datalog
     ports: 
       - "2181:2181"
+  dubbo-admin:
+    image: apache/dubbo-admin
+    container_name: dubbo-admin
+    # 等待zk启动后再启动
+    depends_on:
+      - zookeeper
+    ports:
+      - 8080:8080
+    networks:
+      - my_net
+    environment:
+      - admin.registry.address=zookeeper://zookeeper:2181
+      - admin.config-center=zookeeper://zookeeper:2181
+      - admin.metadata-report.address=zookeeper://zookeeper:2181
   nacos:
     image: nacos/nacos-server:2.0.0
     container_name: nacos
