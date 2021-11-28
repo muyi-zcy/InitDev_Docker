@@ -25,6 +25,7 @@ echo '创建nacos配置';
 mkdir -p ~/data/nacos;
 mkdir -p ~/data/nacos/init.d;
 cp -f ./nacos/init.d/custom.properties ~/data/nacos/init.d;
+mkdir -p ~/data/zk;
 
 mkdir -p ~/data/seata/resources/
 cp -f ./seata/config/registry.conf ~/data/seata/resources
@@ -41,7 +42,7 @@ chmod -R 777 ~/data/
 
 docker-compose  -f docker-compose.yml up -d;
 
-docker exec -i $(docker ps -aqf 'name=mysql') mysql -u root -p123456 <./sql/seata_init.sql
+docker exec -i $(docker ps -aqf 'name=mysql') mysql -u root -pdevMysqlPasswd <./sql/seata_init.sql
 
 cd config-center/nacos;
 bash nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t seata -u nacos -w nacos
