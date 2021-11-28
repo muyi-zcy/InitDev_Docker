@@ -6,9 +6,9 @@ services:
     networks:
       - my_net
     container_name: redis
-    command: redis-server --requirepass 123456 --appendonly yes
+    command: redis-server --requirepass devRedisPasswd --appendonly yes
     ports:
-      - "6379:6379"
+      - "16379:6379"
     volumes:
       - /root/data/redis/data:/data
       - /root/data/redis/redis.conf:/etc/redis/redis.conf
@@ -21,15 +21,15 @@ services:
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=devMysqlPasswd
       - MYSQL_DATABASE=nacos_config
       - MYSQL_USER=nacos
       - MYSQL_PASSWORD=nacos
     ports:
       - '3306:3306'
     volumes:
-      - /root/data/mysql/data/db:/var/lib/mysql"
-      - /root/data/mysql/data/conf:/etc/mysql/conf.d"
+      - /root/data/mysql/data/db:/var/lib/mysql
+      - /root/data/mysql/data/conf:/etc/mysql/conf.d
   zookeeper:
     image: zookeeper
     restart: always
