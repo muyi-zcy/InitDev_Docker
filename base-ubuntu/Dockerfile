@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 MAINTAINER muyi zcy_nemo@aliyun.com
-LABEL Description="Ubuntu base image 1.0"
+LABEL Description="Ubuntu base image 1.0 <路漫漫其修远兮，吾将上下而求索>"
 
 ARG JAVA_VERSION=8
 ARG JAVA_RELEASE=JDK

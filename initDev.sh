@@ -27,6 +27,9 @@ mkdir -p ~/data/nacos/init.d;
 cp -f ./nacos/init.d/custom.properties ~/data/nacos/init.d;
 mkdir -p ~/data/zk;
 
+mkdir -p ~/data/rocketmq/broker;
+cp -f ./rocketmq/broker/broker.conf ~/data/rocketmq/broker;
+
 mkdir -p ~/data/seata/resources/
 cp -f ./seata/config/registry.conf ~/data/seata/resources
 

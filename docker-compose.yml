@@ -76,6 +76,50 @@ services:
     restart: always
     networks:
       - my_net
+
+  rocketmq-server:
+    image: foxiswho/rocketmq:server
+    container_name: rocketmq-server
+    ports:
+      - 9876:9876
+    volumes:
+      - /root/data/rocketmq/server/logs:/opt/logs
+      - /root/data/rocketmq/server/store:/opt/store
+    networks:
+      - my_net
+
+  rocketmq-broker:
+    image: foxiswho/rocketmq:broker
+    container_name: rocketmq-broker
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - /root/data/rocketmq/broker/logs:/opt/logs
+      - /root/data/rocketmq/broker/store:/opt/store
+      - /root/data/rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      NAMESRV_ADDR: "rocketmq-server:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: mqbroker -c /etc/rocketmq/broker.conf
+    depends_on:
+      - rocketmq-server
+    networks:
+      - my_net
+
+  rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: rocketmq-console
+    ports:
+      - 8080:8080
+    environment:
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=rocketmq-server:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    depends_on:
+      - rocketmq-server
+    networks:
+      - my_net
+
   sentinel:
     image: bladex/sentinel-dashboard:1.8.0
     container_name: sentinel
