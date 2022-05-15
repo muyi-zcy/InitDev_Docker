@@ -46,6 +46,7 @@ chmod -R 777 ~/data/
 docker-compose  -f docker-compose.yml up -d;
 
 docker exec -i $(docker ps -aqf 'name=mysql') mysql -u root -pdevMysqlPasswd <./sql/seata_init.sql
+docker exec -i $(docker ps -aqf 'name=mysql') mysql -u root -pdevMysqlPasswd <./sql/xxl-job.sql
 
 cd config-center/nacos;
 bash nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t seata -u nacos -w nacos
