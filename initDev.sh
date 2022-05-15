@@ -41,7 +41,7 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}");
 docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm;
 
 # 给data 文件夹赋予权限
-chmod -R 777 ~/data/
+chmod -R a+rwx  ~/data/
 
 docker-compose  -f docker-compose.yml up -d;
 

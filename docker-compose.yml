@@ -112,7 +112,7 @@ services:
     image: styletang/rocketmq-console-ng
     container_name: rocketmq-console
     ports:
-      - 8080:8080
+      - 18080:8080
     environment:
       JAVA_OPTS: "-Drocketmq.namesrv.addr=rocketmq-server:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     depends_on:
