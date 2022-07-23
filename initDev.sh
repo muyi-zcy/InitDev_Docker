@@ -24,14 +24,14 @@ cp -f ./mysql/my.cnf ~/data/mysql;
 echo '创建nacos配置';
 mkdir -p ~/data/nacos;
 mkdir -p ~/data/nacos/init.d;
-cp -f ./nacos/init.d/custom.properties ~/data/nacos/init.d;
+cp -f ./nacos/init.d/custom.properties ~/data/nacos/init.d/custom.properties;
 mkdir -p ~/data/zk;
 
 mkdir -p ~/data/rocketmq/broker;
-cp -f ./rocketmq/broker/broker.conf ~/data/rocketmq/broker;
+cp -f ./rocketmq/broker/broker.conf ~/data/rocketmq/broker/broker.conf;
 
 mkdir -p ~/data/seata/resources/
-cp -f ./seata/config/registry.conf ~/data/seata/resources
+cp -f ./seata/config/registry.conf ~/data/seata/resources/registry.conf
 
 # 删除所有dangling数据卷(即无用的volume)
 docker volume rm $(docker volume ls -qf dangling=true);
