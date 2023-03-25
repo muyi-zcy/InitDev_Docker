@@ -16,6 +16,7 @@ sudo systemctl start docker
 
 sudo groupadd docker
 sudo usermod -aG docker $USER
+newgrp docker
 
 echo '测试docker安装结果：'
 docker run --rm hello-world
