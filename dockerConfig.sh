@@ -45,13 +45,14 @@ if getent group docker >/dev/null; then
 else
   echo "Group docker does not exist"
   sudo groupadd docker
-  if groups | grep -q '\b<groupname>\b'; then
+fi
+
+if groups | grep -q '\b<groupname>\b'; then
     echo "User is in group"
   else
     echo "User is not in group"
-    sudo newgrp docker
     sudo usermod -aG docker $USER
-  fi
+    # sudo newgrp docker
 fi
 
 
