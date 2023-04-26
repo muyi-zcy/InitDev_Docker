@@ -62,6 +62,11 @@ sudo systemctl start docker
 echo '测试docker安装结果：'
 docker run --rm hello-world
 
+echo '安装docker-machine'
+sudo scp docker-machine-Linux-x86_64 /usr/local/bin/docker-machine
+sudo chmod 755  /usr/local/bin/docker-machine
+
+
 echo '安装docker-compose'
 sudo scp docker-compose-linux-x86_64 /usr/local/bin/docker-compose
 sudo chmod 755  /usr/local/bin/docker-compose
