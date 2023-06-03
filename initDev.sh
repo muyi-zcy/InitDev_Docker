@@ -103,13 +103,13 @@ if [ ! -d  ${datapath}/data/zk ];then
 fi
 
 echo '创建rocketmq配置';
-if [ ! -d  ${datapath}/data/rocketmq/broker ];then
-  mkdir -p ${datapath}/data/rocketmq/broker;
-  echo "创建目录：${datapath}/data/rocketmq/broker 完成"
+if [ ! -d  ${datapath}/data/rocketmq/broker/conf ];then
+  mkdir -p ${datapath}/data/rocketmq/broker/conf;
+  echo "创建目录：${datapath}/data/rocketmq/broker/conf 完成"
 fi
 
-if [ ! -f ${datapath}/data/rocketmq/broker/broker.conf ];then
-  cp -f ./rocketmq/broker/broker.conf ${datapath}/data/rocketmq/broker/broker.conf;
+if [ ! -f ${datapath}/data/rocketmq/broker/conf/broker.conf ];then
+  cp -f ./rocketmq/broker/conf/broker.conf ${datapath}/data/rocketmq/broker/conf/broker.conf;
   echo "创建broker.conf 完成"
 fi
 

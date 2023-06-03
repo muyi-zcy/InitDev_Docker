@@ -84,31 +84,28 @@ services:
       - my_net
 
   rocketmq-server:
-    image: foxiswho/rocketmq:server
+    image: apache/rocketmq:4.9.4
     container_name: rocketmq-server
     ports:
       - 9876:9876
+    command: sh mqnamesrv
     volumes:
-      - ${path}/data/rocketmq/server/logs:/opt/logs
-      - ${path}/data/rocketmq/server/store:/opt/store
+      - ${path}/data/rocketmq/server/logs:/home/rocketmq/logs/rocketmqlogs
     networks:
       - my_net
 
   rocketmq-broker:
-    image: foxiswho/rocketmq:broker
+    image: apache/rocketmq:4.9.4
     container_name: rocketmq-broker
     ports:
       - 10909:10909
       - 10911:10911
+      - 10912:10912
     volumes:
-      - ${path}/data/rocketmq/broker/logs:/opt/logs
-      - ${path}/data/rocketmq/broker/store:/opt/store
-      - ${path}/data/rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
-    environment:
-      NAMESRV_ADDR: "rocketmq-server:9876"
-      JAVA_OPTS: " -Duser.home=/opt"
-      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
-    command: mqbroker -c /etc/rocketmq/broker.conf
+      - ${path}/data/rocketmq/broker/conf/broker.conf:/home/rocketmq/rocketmq-4.9.4/conf/broker.conf
+      - ${path}/data/rocketmq/broker/logs:/home/rocketmq/logs/rocketmqlogs
+      - ${path}/data/rocketmq/broker/store:/home/rocketmq/store
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.4/conf/broker.conf
     depends_on:
       - rocketmq-server
     networks:
