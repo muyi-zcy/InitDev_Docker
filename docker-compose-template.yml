@@ -101,6 +101,8 @@ services:
       - 10909:10909
       - 10911:10911
       - 10912:10912
+    environment:
+      - NAMESRV_ADDR=rocketmq-server:9876
     volumes:
       - ${path}/data/rocketmq/broker/conf/broker.conf:/home/rocketmq/rocketmq-4.9.4/conf/broker.conf
       - ${path}/data/rocketmq/broker/logs:/home/rocketmq/logs/rocketmqlogs
