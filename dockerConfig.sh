@@ -3,7 +3,7 @@
 # 安装docker
 # Version:Ubuntu 20.04 LTS
 
-if [ $USER != "root" ]
+if [ "$USER" != "root" ]
 then
     echo "ERROR: Unable to perform installation as non-root user."
     exit
@@ -17,7 +17,7 @@ echo '
 # docker-compose version: Docker Compose version v2.16.0
 ########################################
 '
-cd docker_install
+cd docker_install || exit
 
 
 #
@@ -27,6 +27,7 @@ cd docker_install
 
 
 
+# shellcheck disable=SC2154
 if [[  $type == "script"  ]];
 then
     echo '执行脚本安装'
@@ -47,7 +48,7 @@ else
   sudo groupadd docker
 fi
 
-if groups | grep -q '\b<groupname>\b'; then
+if groups | grep -q '\b$groupname\b'; then
     echo "User is in group"
   else
     echo "User is not in group"
